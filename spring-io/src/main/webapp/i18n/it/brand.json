@@ -1,0 +1,25 @@
+{
+    "springIoApp": {
+        "brand" : {
+            "home": {
+                "title": "Brands",
+                "createLabel": "Genera un nuovo Brand",
+                "createOrEditLabel": "Genera o modifica un Brand",
+                "search": "Cerca Brand"
+            },
+            "created": "&Egrave; stato generato un nuovo Brand con identificatore {{ param }}",
+            "updated": "&Egrave; stato aggiornato Brand identificato da {{ param }}",
+            "deleted": "&Egrave; stato eliminato Brand con identificatore {{ param }}",
+            "delete": {
+                "question": "Sei sicuro di volere eliminare Brand {{ id }}?"
+            },
+            "detail": {
+                "title": "Brand"
+            },
+            "name": "Name",
+            "startDate": "Start Date",
+            "product": "Product",
+            "user": "User"
+        }
+    }
+}

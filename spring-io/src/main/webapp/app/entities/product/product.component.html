@@ -1,0 +1,75 @@
+<div>
+    <h2>
+        <span jhiTranslate="springIoApp.product.home.title">Products</span>
+        <button class="btn btn-primary float-right create-product" [routerLink]="['/', { outlets: { popup: ['product-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down"  jhiTranslate="springIoApp.product.home.createLabel">
+            Create new Product
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'springIoApp.product.home.search' | translate }}">
+                    <button class="input-group-addon btn btn-info" (click)="search(currentSearch)">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button class="input-group-addon btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="products">
+        <ul class="list-group" infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <li *ngFor="let product of products ;trackBy: trackId" class="list-group-item">
+                <div class="w-100 justify-content-between">
+                    <div>
+                        <a *ngIf="product.image" (click)="openFile(product.imageContentType, product.image)">
+                            <img [src]="'data:' + product.imageContentType + ';base64,' + product.image" style="max-height: 200px;" alt="product image"/>
+                        </a>
+                    </div>
+                    <h2>{{product.name}}</h2>
+                    <hr>
+                    <div [innerHtml]="product.description"></div>
+                    <p>Price: {{product.price}}</p>
+                    <p>Size: <span jhiTranslate="{{'springIoStoreApp.Size.' + product.size}}">{{product.size}}</span></p>
+                    <p>Available till: {{product.availableUntil | date:'medium'}}</p>
+                    <div>Brand:
+                        <div *ngIf="product.brand">
+                            <a [routerLink]="['../brand', product.brand?.id ]" >{{product.brand?.name}}</a>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['../product', product.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'product/'+ product.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'product/'+ product.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

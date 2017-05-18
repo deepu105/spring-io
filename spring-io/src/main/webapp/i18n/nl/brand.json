@@ -1,0 +1,25 @@
+{
+    "springIoApp": {
+        "brand" : {
+            "home": {
+                "title": "Brands",
+                "createLabel": "Maak een nieuwe Brand",
+                "createOrEditLabel": "Maak of wijzig een Brand",
+                "search": "Search for Brand"
+            },
+            "created": "A new Brand is created with identifier {{ param }}",
+            "updated": "A Brand is updated with identifier {{ param }}",
+            "deleted": "A Brand is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Bent u zeker dat u Brand {{ id }} wilt verwijderen?"
+            },
+            "detail": {
+                "title": "Brand"
+            },
+            "name": "Name",
+            "startDate": "Start Date",
+            "product": "Product",
+            "user": "User"
+        }
+    }
+}

@@ -1,0 +1,31 @@
+
+<div *ngIf="subCategory">
+    <h2><span jhiTranslate="springIoApp.subCategory.detail.title">Sub Category</span> {{subCategory.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="springIoApp.subCategory.name">Name</span></dt>
+        <dd>
+            <span>{{subCategory.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="springIoApp.subCategory.category">Category</span></dt>
+        <dd>
+            <div *ngIf="subCategory.category">
+                <a [routerLink]="['/category', subCategory.category?.id]">{{subCategory.category?.name}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'sub-category/'+ subCategory.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

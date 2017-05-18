@@ -1,0 +1,24 @@
+{
+    "springIoApp": {
+        "subCategory" : {
+            "home": {
+                "title": "SubCategories",
+                "createLabel": "Genera un nuovo Sub Category",
+                "createOrEditLabel": "Genera o modifica un Sub Category",
+                "search": "Cerca Sub Category"
+            },
+            "created": "&Egrave; stato generato un nuovo Sub Category con identificatore {{ param }}",
+            "updated": "&Egrave; stato aggiornato Sub Category identificato da {{ param }}",
+            "deleted": "&Egrave; stato eliminato Sub Category con identificatore {{ param }}",
+            "delete": {
+                "question": "Sei sicuro di volere eliminare Sub Category {{ id }}?"
+            },
+            "detail": {
+                "title": "Sub Category"
+            },
+            "name": "Name",
+            "category": "Category",
+            "product": "Product"
+        }
+    }
+}

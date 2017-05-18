@@ -1,0 +1,33 @@
+
+<div *ngIf="brand">
+    <h2><span jhiTranslate="springIoApp.brand.detail.title">Brand</span> {{brand.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="springIoApp.brand.name">Name</span></dt>
+        <dd>
+            <span>{{brand.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="springIoApp.brand.startDate">Start Date</span></dt>
+        <dd>
+            <span>{{brand.startDate | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="springIoApp.brand.user">User</span></dt>
+        <dd>
+            {{brand.user?.login}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'brand/'+ brand.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

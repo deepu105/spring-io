@@ -1,0 +1,24 @@
+{
+    "springIoApp": {
+        "category" : {
+            "home": {
+                "title": "Categories",
+                "createLabel": "Genera un nuovo Category",
+                "createOrEditLabel": "Genera o modifica un Category",
+                "search": "Cerca Category"
+            },
+            "created": "&Egrave; stato generato un nuovo Category con identificatore {{ param }}",
+            "updated": "&Egrave; stato aggiornato Category identificato da {{ param }}",
+            "deleted": "&Egrave; stato eliminato Category con identificatore {{ param }}",
+            "delete": {
+                "question": "Sei sicuro di volere eliminare Category {{ id }}?"
+            },
+            "detail": {
+                "title": "Category"
+            },
+            "name": "Name",
+            "status": "Status",
+            "subcategory": "Subcategory"
+        }
+    }
+}

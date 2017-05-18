@@ -1,0 +1,24 @@
+{
+    "springIoApp": {
+        "subCategory" : {
+            "home": {
+                "title": "Sub Categories",
+                "createLabel": "建立一筆新的 Sub Category",
+                "createOrEditLabel": "建立或編輯 Sub Category",
+                "search": "搜尋 Sub Category"
+            },
+            "created": "新的 Sub Category 建立成功，識別碼為 {{ param }}",
+            "updated": "識別碼為 {{ param }} 的 Sub Category 更新成功",
+            "deleted": "識別碼為 {{ param }} 的 Sub Category 刪除成功",
+            "delete": {
+                "question": "您確定要刪除 Sub Category {{ id }} 嗎?"
+            },
+            "detail": {
+                "title": "Sub Category"
+            },
+            "name": "Name",
+            "category": "Category",
+            "product": "Product"
+        }
+    }
+}

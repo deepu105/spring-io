@@ -1,0 +1,62 @@
+
+<div *ngIf="product">
+    <h2><span jhiTranslate="springIoApp.product.detail.title">Product</span> {{product.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="springIoApp.product.name">Name</span></dt>
+        <dd>
+            <span>{{product.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="springIoApp.product.description">Description</span></dt>
+        <dd>
+            <span>{{product.description}}</span>
+        </dd>
+        <dt><span jhiTranslate="springIoApp.product.image">Image</span></dt>
+        <dd>
+            <div *ngIf="product.image">
+                <a (click)="openFile(product.imageContentType, product.image)">
+                    <img [src]="'data:' + product.imageContentType + ';base64,' + product.image" style="max-width: 100%;" alt="product image"/>
+                </a>
+                {{product.imageContentType}}, {{byteSize(product.image)}}
+            </div>
+        </dd>
+        <dt><span jhiTranslate="springIoApp.product.price">Price</span></dt>
+        <dd>
+            <span>{{product.price}}</span>
+        </dd>
+        <dt><span jhiTranslate="springIoApp.product.size">Size</span></dt>
+        <dd>
+            <span jhiTranslate="{{'springIoApp.Size.' + product.size}}">{{product.size}}</span>
+        </dd>
+        <dt><span jhiTranslate="springIoApp.product.availableUntil">Available Until</span></dt>
+        <dd>
+            <span>{{product.availableUntil | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="springIoApp.product.subcategory">Subcategory</span></dt>
+        <dd>
+            <span *ngFor="let subcategory of product.subcategories; let last = last">
+                <a [routerLink]="['/sub-category', subcategory?.id ]">{{subcategory.name}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span jhiTranslate="springIoApp.product.brand">Brand</span></dt>
+        <dd>
+            <div *ngIf="product.brand">
+                <a [routerLink]="['/brand', product.brand?.id]">{{product.brand?.name}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'product/'+ product.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

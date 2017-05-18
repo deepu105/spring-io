@@ -1,0 +1,49 @@
+entity Brand {
+	name String required,
+    startDate Instant
+}
+
+entity Product {
+    name String,
+    description String,
+    image ImageBlob,
+    price BigDecimal,
+    size Size,
+    availableUntil Instant
+}
+
+entity Category {
+    name String,
+    status CategoryStatus
+}
+
+enum CategoryStatus {
+    AVAILABLE, RESTRICTED, DISABLED
+}
+
+enum Size {
+	S, M, L, XL, XXL
+}
+
+entity SubCategory {
+	name String
+}
+
+relationship OneToMany {
+	Brand{product} to Product{brand(name)},
+    Category{subcategory} to SubCategory{category(name)}
+}
+
+relationship ManyToMany {
+	Product{subcategory(name)} to
+    SubCategory{product}
+}
+
+relationship ManyToOne {
+	Brand{user(login)} to User
+}
+
+paginate Category, SubCategory  with pagination
+paginate Product with infinite-scroll
+service * with serviceClass
+microservice * with store
