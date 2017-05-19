@@ -1,0 +1,24 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "catType",
+            "fieldType": "CatalogType",
+            "fieldValues": "X, XL, XXL"
+        }
+    ],
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "catalog",
+    "pagination": "pagination",
+    "microserviceName": "cms",
+    "searchEngine": false
+}

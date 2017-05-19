@@ -1,0 +1,15 @@
+{
+  "generator-jhipster": {
+    "appsFolders": [
+      "cms",
+      "gateway",
+      "store"
+    ],
+    "directoryPath": "../",
+    "clusteredDbApps": [],
+    "monitoring": "elk",
+    "serviceDiscoveryType": "eureka",
+    "adminPassword": "admin",
+    "jwtSecretKey": "20fd63c1ba7c36bc77b6e8c2d7884e58e98addaf"
+  }
+}

@@ -1,0 +1,27 @@
+{
+    "gatewayApp": {
+        "category" : {
+            "home": {
+                "title": "Categories",
+                "createLabel": "Create a new Category",
+                "createOrEditLabel": "Create or edit a Category"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Category {{ id }}?"
+            },
+            "detail": {
+                "title": "Category"
+            },
+            "name": "Name",
+            "status": "Status",
+            "subcategory": "Subcategory"
+        }
+    },
+    "storeApp": {
+        "category" : {
+            "created": "A new Category is created with identifier {{ param }}",
+            "updated": "A Category is updated with identifier {{ param }}",
+            "deleted": "A Category is deleted with identifier {{ param }}"
+        }
+    }
+}

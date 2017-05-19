@@ -1,0 +1,27 @@
+{
+    "gatewayApp": {
+        "brand" : {
+            "home": {
+                "title": "Brands",
+                "createLabel": "Create a new Brand",
+                "createOrEditLabel": "Create or edit a Brand"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Brand {{ id }}?"
+            },
+            "detail": {
+                "title": "Brand"
+            },
+            "name": "Name",
+            "startDate": "Start Date",
+            "product": "Product"
+        }
+    },
+    "storeApp": {
+        "brand" : {
+            "created": "A new Brand is created with identifier {{ param }}",
+            "updated": "A Brand is updated with identifier {{ param }}",
+            "deleted": "A Brand is deleted with identifier {{ param }}"
+        }
+    }
+}

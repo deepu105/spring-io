@@ -1,0 +1,26 @@
+{
+    "gatewayApp": {
+        "catalog" : {
+            "home": {
+                "title": "Catalogs",
+                "createLabel": "Create a new Catalog",
+                "createOrEditLabel": "Create or edit a Catalog"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Catalog {{ id }}?"
+            },
+            "detail": {
+                "title": "Catalog"
+            },
+            "name": "Name",
+            "catType": "Cat Type"
+        }
+    },
+    "cmsApp": {
+        "catalog" : {
+            "created": "A new Catalog is created with identifier {{ param }}",
+            "updated": "A Catalog is updated with identifier {{ param }}",
+            "deleted": "A Catalog is deleted with identifier {{ param }}"
+        }
+    }
+}

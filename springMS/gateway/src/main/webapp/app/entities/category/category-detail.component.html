@@ -1,0 +1,29 @@
+
+<div *ngIf="category">
+    <h2><span jhiTranslate="gatewayApp.category.detail.title">Category</span> {{category.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="gatewayApp.category.name">Name</span></dt>
+        <dd>
+            <span>{{category.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.category.status">Status</span></dt>
+        <dd>
+            <span jhiTranslate="{{'gatewayApp.CategoryStatus.' + category.status}}">{{category.status}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'category/'+ category.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

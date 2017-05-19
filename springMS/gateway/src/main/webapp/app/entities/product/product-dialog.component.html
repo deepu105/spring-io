@@ -1,0 +1,92 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myProductLabel" jhiTranslate="gatewayApp.product.home.createOrEditLabel">Create or edit a Product</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!product.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="product.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="gatewayApp.product.name" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                [(ngModel)]="product.name"
+             />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="gatewayApp.product.description" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                [(ngModel)]="product.description"
+             />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="gatewayApp.product.image" for="field_image">Image</label>
+            <div>
+                <img [src]="'data:' + product.imageContentType + ';base64,' + product.image" style="max-height: 100px;" *ngIf="product.image" alt="product image"/>
+                <div *ngIf="product.image" class="form-text text-danger clearfix">
+                    <span class="pull-left">{{product.imageContentType}}, {{byteSize(product.image)}}</span>
+                    <button type="button" (click)="product.image=null;product.imageContentType=null;"
+                            class="btn btn-default btn-xs pull-right">
+                        <span class="fa fa-times"></span>
+                    </button>
+                </div>
+                <input type="file" (change)="setFileData($event, product, 'image', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+            </div>
+            <input type="hidden" class="form-control" name="image" id="field_image"
+                [(ngModel)]="product.image"
+             />
+            <input type="hidden" class="form-control" name="imageContentType" id="field_imageContentType"
+                [(ngModel)]="product.imageContentType" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="gatewayApp.product.price" for="field_price">Price</label>
+            <input type="number" class="form-control" name="price" id="field_price"
+                [(ngModel)]="product.price"
+             />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="gatewayApp.product.size" for="field_size">Size</label>
+            <select class="form-control" name="size" [(ngModel)]="product.size" id="field_size" >
+                <option value="S" jhiTranslate="gatewayApp.Size.S">S</option>
+                <option value="M" jhiTranslate="gatewayApp.Size.M">M</option>
+                <option value="L" jhiTranslate="gatewayApp.Size.L">L</option>
+                <option value="XL" jhiTranslate="gatewayApp.Size.XL">XL</option>
+                <option value="XXL" jhiTranslate="gatewayApp.Size.XXL">XXL</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="gatewayApp.product.availableUntil" for="field_availableUntil">Available Until</label>
+            <div class="d-flex">
+                <input id="field_availableUntil" type="datetime-local" class="form-control" name="availableUntil" [(ngModel)]="product.availableUntil"
+                  />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label jhiTranslate="gatewayApp.product.subcategory" for="field_subcategory">Subcategory</label>
+            <select class="form-control" id="field_subcategory" multiple name="subcategory" [(ngModel)]="product.subcategories">
+                <option [ngValue]="getSelected(product.subcategories, subCategoryOption)" *ngFor="let subCategoryOption of subcategories; trackBy: trackSubCategoryById">{{subCategoryOption.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label jhiTranslate="gatewayApp.product.brand" for="field_brand">Brand</label>
+            <select class="form-control" id="field_brand" name="brand" [(ngModel)]="product.brand" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="brandOption.id === product.brand?.id ? product.brand : brandOption" *ngFor="let brandOption of brands; trackBy: trackBrandById">{{brandOption.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

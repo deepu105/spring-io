@@ -1,0 +1,31 @@
+{
+    "health": {
+        "title": "Revisions de salud",
+        "refresh.button": "Actualitzar",
+        "stacktrace": "Traça d'error",
+        "details": {
+            "details": "Detalls",
+            "properties": "Propietats",
+            "name": "Nom",
+            "value": "Valor",
+            "error": "Error"
+        },
+        "indicator": {
+            "discoveryComposite": "Discovery Composite",
+            "refreshScope": "Microservice Refresh Scope",
+            "configServer": "Microservice Config Server",
+            "hystrix": "Hystrix",
+            "diskSpace": "Espai al disc",
+            "mail": "Compte de correu electrònic",
+            "db": "Base de dades"
+        },
+        "table": {
+            "service": "Nom del servei",
+            "status": "Estat"
+        },
+        "status": {
+            "UP": "ACTIU",
+            "DOWN": "INACTIU"
+        }
+    }
+}
