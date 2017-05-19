@@ -1,13 +1,15 @@
 # Spring IO 2017
 ## Build a complex Spring Boot microservices architecture using JHipster
 
+[Presentation](https://deepu.js.org/jh-slides-springio-2017/index-ms.html)
+
 ### Develop and Deploy Microservices with JHipster
 > This instruction is adapted from a similar instruction written by Matt Raible [here](https://github.com/mraible/microservices-for-the-masses/blob/master/demos/jhipster-microservices/TUTORIAL.md). This has been updated to reflect the latest JHipster version and to use a different combination of micro services and entities. I highly recommend you also check the original instruction out if you wanna try out the Kubernetes deployment.
 
 > Learn how to develop a microservice architecture with JHipster, Spring Boot, Angular, MySQL and MongoDB and deploy it all using Docker.
 
 This tutorial shows you how to build a microservices architecture with [JHipster 4.4.1](https://jhipster.github.io/2017/05/08/jhipster-release-4.4.1.html). 
-You'll generate a gateway (powered by Netflix Zuul and the JHipster Gateway), a microservice (that talks to MongoDB), a microservice that talks to MySQL and use Docker Compose to deploy it all.
+You'll generate a gateway (powered by Netflix Zuul and the JHipster Gateway), a microservice (that talks to MongoDB), a microservice (that talks to MySQL) and use Docker Compose to deploy it all.
 
 ## What is JHipster?
 
@@ -65,7 +67,7 @@ You can see how these components fit in the diagram below.
 
 ![JHipster Microservices Architecture](static/ms-arch.png)
 
-For this tutorial we will be creating teh following application architecture
+For this tutorial we will be creating the following application architecture
 
 ![Tutorial Microservices Architecture](static/ms-arch-store.png)
 
@@ -649,12 +651,10 @@ If you got everything working, congratulations! It's not easy learning all this 
 
 ## Screencast
 
+To see a detailed video tutorial on Jhipster by Julien Dubois & Myself, [watch this YouTube video](https://youtu.be/dzdjP3CPOCs).
+
 To see a screencast by Matt Raible on building microservices with JHipster and deploying to Google Cloud, 
 [watch this YouTube video](https://youtu.be/dgVQOYEwleA).
-
-<div style="max-width: 560px; margin: 0 auto">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/dgVQOYEwleA?ecver=1" frameborder="0" allowfullscreen></iframe>
-</div>
 
 ## Learn More about JHipster and Microservices
 
@@ -679,6 +679,8 @@ Stack Overflow with the ["jhipster" tag](http://stackoverflow.com/questions/tagg
 You might also find the following resources interesting:
 
 * [Doing Microservices with JHipster](https://jhipster.github.io/microservices-architecture/)
-* [Building a Microservices Architecture for Microbrews](TBD on Okta Dev Blog)
+* [JHipster Videos](https://jhipster.github.io/video-tutorial/)
 * [Bootstrapping Your Microservices Architecture with JHipster and Spring](https://blog.heroku.com/bootstrapping_your_microservices_architecture_with_jhipster_and_spring)
+* [JHipster Tutorial by Electronic Armory](https://www.youtube.com/playlist?list=PLP8n25bNfkdcGTINO2ZJXnzvMGK3nm3zY)
 * [Microservice Resources from Chris Richardson](http://microservices.io/resources/index.html)
+* [IBM use case](https://www.slideshare.net/IBMFranceLab/ibm-bluemix-paris-meetup-23-20170425-rex-de-lentreprise-sis)
