@@ -1,8 +1,8 @@
 # Spring IO 2017
-## Build complex Spring Boot microservices architecture using JHipster
+## Build a complex Spring Boot microservices architecture using JHipster
 
 ### Develop and Deploy Microservices with JHipster
-> This instruction is adapted from a similar instruction written by Matt Raible [here](https://github.com/mraible/microservices-for-the-masses/blob/master/demos/jhipster-microservices/TUTORIAL.md). This has been updated to reflect the latest changes in JHipster and to use a different combination of micro services and entities. I highly recommend you check the original instruction out if you wanna try out Kubernetes deployment.
+> This instruction is adapted from a similar instruction written by Matt Raible [here](https://github.com/mraible/microservices-for-the-masses/blob/master/demos/jhipster-microservices/TUTORIAL.md). This has been updated to reflect the latest JHipster version and to use a different combination of micro services and entities. I highly recommend you also check the original instruction out if you wanna try out the Kubernetes deployment.
 
 > Learn how to develop a microservice architecture with JHipster, Spring Boot, Angular, MySQL and MongoDB and deploy it all using Docker.
 
@@ -63,7 +63,11 @@ To build a microservices architecture with JHipster, you'll need to generate thr
 
 You can see how these components fit in the diagram below.
 
-![JHipster Microservices Architecture](static/jhipster-microservices-architecture.png)
+![JHipster Microservices Architecture](static/ms-arch.png)
+
+For this tutorial we will be creating teh following application architecture
+
+![Tutorial Microservices Architecture](static/ms-arch-store.png)
 
 To see what's happening inside your applications, you can use the [JHipster Console](https://jhipster.github.io/monitoring/#jhipster-console), 
 a monitoring tool based on the [ELK Stack](https://www.elastic.co/products). I'll cover this tool in the Docker Compose 
@@ -78,14 +82,14 @@ create a `gateway` directory for the gateway application.
 mkdir gateway && cd gateway
 ```
 
-In JHipster terms, a **gateway** is a normal JHipster application. This means you can develop 
+In JHipster terms, a **gateway** is a normal JHipster application with Netflix Zuul integration. This means you can develop 
 it like a monolith, but it also acts as the entrance to your microservices. More specifically, it provides HTTP 
 routing and load balancing, rate limiting, quality of service, security, and API documentation for all microservices.
 
 In the `gateway` directory run `yo jhipster`. 
 
-You'll be asked a number of questions about the type of  application you want to generate and what features you'd like 
-to include. Create the `blog` application with the following settings:
+You'll be asked a number of questions about the type of application you want to generate and what features you'd like 
+to include. Create the `gateway` application with the following settings:
 
 * Application type: `Microservice gateway`
 * Base name of the application: `gateway`
@@ -149,10 +153,14 @@ and run `yo jhipster` in it. You won't be prompted to answer any questions becau
 }
 ```
 
-The project creation process will take a couple minutes to run, depending on your internet connection speed. When it's 
-finished, you should see output suggesting that the app was generated succesfully.
+![JHipster Gateway](static/gateway-gen.png)
 
-Before you can run this project, you'll need to download and start a instance of the [JHipster Registry](https://github.com/jhipster/jhipster-registry).
+The project creation process will take a couple minutes to run, depending on your internet connection speed. When it's 
+finished, you should see output suggesting that the app was generated successfully.
+
+![JHipster Gateway Success](static/gateway-done.png)
+
+Before you can run this project, you'll need to download and start an instance of the [JHipster Registry](https://github.com/jhipster/jhipster-registry).
 You can either clone and run the project 
 
 ```bash
@@ -267,7 +275,9 @@ Here is the `.yo-rc.json` for the same
 
 ```
 
-Once its done you should see a message saying app generated succesfully
+![JHipster Microservices Store](static/store-gen.png)
+
+Once its done you should see a message saying app generated successfully
 
 Start the service using Gradle (You can also run the main class form your IDE)
 
@@ -343,7 +353,9 @@ Here is the `.yo-rc.json` for the same
 
 ```
 
-Once its done you should see a message saying app generated succesfully
+![JHipster Microservices CMS](static/cms-gen.png)
+
+Once its done you should see a message saying app generated successfully
 
 Start the service using Gradle (You can also run the main class form your IDE)
 
@@ -377,7 +389,7 @@ The good news is JHipster can generate all of this code for you, including integ
 addition, if you have entities with relationships, it will generate the necessary schema to support them (with foreign 
 keys), and the TypeScript and HTML code to manage them. You can also set up validation to require certain fields as well as control their length.
 
-What is even cooler is that JHipster can create the backend code for entities in a microservice and automatically create the appropriate front end code in the gateway.
+What is even cooler is that JHipster can create the server-side code for entities in a microservice and automatically create the appropriate client-side code in the gateway.
 
 JHipster supports several methods of code generation. The first uses its [entity sub-generator](https://jhipster.github.io/creating-an-entity/). 
 The entity sub-generator is a command-line tool that prompts you with questions which you answer. 
@@ -389,7 +401,7 @@ nature of JDL-Studio, so I'll use it for this project.
 
 Below is the entity diagram and JDL code needed to generate a simple store app schema
 
-![Blog entity diagram](static/jdl-studio-blog.png)
+![Store entity diagram](static/jdl-model.png)
 
 You can copy/paste the contents of the file below to your hard 
 drive if you'd like to follow along.
@@ -443,7 +455,7 @@ microservice * with store
 
 ```
 
-Run the following command (in the `store` directory) to import this file. Running this command will generate backend for entities and Junit integration tests.
+Run the following command (in the `store` directory) to import this file. Running this command will generate server-side code for entities and Junit integration tests.
 
 ```bash
 yo jhipster:import-jdl ./jhipster-jdl.jh
@@ -454,18 +466,17 @@ well as others.
 
 Start the application with `/.gradlew` if its not running already. If you already have it running then either recompile using `./gradlew compileJava` or using your IDE.
 
-Now we need a front end for this. Navigate to the gateway folder and run these commands
+Now we need a UI for this. Navigate to the gateway folder and run these commands
 
 ```bash
 cd ../gateway
 yo jhipster:import-jdl ../store/jhipster-jdl.jh
 ```
 
-JHipster will automatically create appropriate front end for the entities since we have declared `microservice * with store` in the JDL
+JHipster will automatically create appropriate client-side for the entities since we have declared `microservice * with store` in the JDL
 
 Now run `yarn start` if its not running already to view the UI for the generated entities. Create a couple 
 Brand for the existing `admin` and `user` users, as well as a few Categories, Sub Categories and few Product entries.
-
 
 Commit all your changes to Git.
 
@@ -490,12 +501,12 @@ Use the following answers for the questions asked:
 * Do you want to add validation rules to your field? `Yes`
 * Which validation rules do you want to add? `Required`
 
-* Do you want to add a field to your entity? Yes
-* What is the name of your field? catType
-* What is the type of your field? Enumeration (Java enum type)
-* What is the class name of your enumeration? CatalogType
-* What are the values of your enumeration (separated by comma)? X, XL, XXL
-* Do you want to add validation rules to your field? No
+* Do you want to add a field to your entity? `Yes`
+* What is the name of your field? `catType`
+* What is the type of your field? `Enumeration (Java enum type)`
+* What is the class name of your enumeration? `CatalogType`
+* What are the values of your enumeration (separated by comma)? `X, XL, XXL`
+* Do you want to add validation rules to your field? `No`
 
 * Do you want to add a field to your entity? `No`
 
@@ -505,7 +516,7 @@ Use the following answers for the questions asked:
 
 Your terminal should look similar to the following after you've answered all these questions.
 
-![Generating product entity](static/generating-product.png)
+![Generating catalog entity](static/gen-catalog.png)
 
 ### Generate UI for Catalog Entity
 
@@ -524,7 +535,7 @@ Use the following answers for the questions asked:
 
 A visual of these questions and answers is in the screenshot below.
 
-![Generating product entity UI](static/generating-product-ui.png)
+![Generating catalog entity UI](static/generating-catalog-ui.png)
 
 Commit your changes to Git.
 
@@ -573,8 +584,7 @@ What good is a microservices architecture if it's not deployed to a PaaS (Platfo
 are also known as "the cloud", and allow you to easily deploy and scale microservices as needed. Docker provides
 a mechanism to "package" your applications as an entire bundle. A Docker container includes the operating system and 
 services needed to run your application. Often, Docker containers are used for the individual components of your 
-architecture. For example, you'll have a Docker container for each app, as well as one for PostgreSQL, MongoDB, and
-Elasticsearch.
+architecture. For example, you'll have a Docker container for each app, as well as one for MySQL and MongoDB.
 
 To complete this section, you'll need to [install Docker](https://docs.docker.com/engine/installation/).
 
@@ -587,10 +597,10 @@ Docker Compose is a tool for defining and running multi-container Docker applica
 start all the components of your application with a single command.
 
 1. Make sure Docker is running.
-2. Build Docker images for the `blog` and `store` applications by running the following command in both directories:
+2. Build Docker images for the `gateway`, `store` and `cms` applications by running the following command in each of the app directories:
 
     ```
-    mvn package -Pprod docker:build
+    ./gradlew -Pprod bootRepackage buildDocker
     ```
     
 3. Using your terminal, navigate to the root directory of your project, and create a `docker` directory. Then run the 
@@ -598,35 +608,24 @@ start all the components of your application with a single command.
 
     ```
     yo jhipster:docker-compose
-    ````
+    ```
     
-    * Application type: `Microservice application`
-    * Root directory of your microservices: `../`
-    * Applications to include: `blog` and `store`
-    * Applications with clustered databases: `None`
-    * Setup monitoring: `JHipster Console with ELK/Zipkin`
-    * The admin password for the JHipster Registry: `admin`
-    
-    ![Generating Docker](static/generate-docker.png)
+* Application type: `Microservice application`
+* Root directory of your microservices: `../`
+* Applications to include: `gateway`, `store` and `cms`
+* Applications with clustered databases: `None`
+* Setup monitoring: `JHipster Console with ELK/Zipkin`
+* The admin password for the JHipster Registry: `admin`
+
     
 4. Run `docker-compose up` to run all your services and see the logs in the same window. Add `-d` if you want to run 
 them as a daemon.
     
-5. Use [Kitematic](https://kitematic.com/) to view the ports and logs for the services deployed.
+5. Use [Kitematic](https://kitematic.com/) to view the ports and logs for the services deployed if you are on Mac or Windows
 
 ![Kitematic](static/kitematic.png)
 
 You can view the JHipster Registry at <http://localhost:8761>.
-
-To produce data for the JHipster Console to display, run some Gatling tests in the `blog` app.
-
-```bash
-mvn gatling:execute
-```
-
-These simulations can take a while (> 10m) to complete. When they're finished, you can view their pretty reports.
-
-![Gatling Results](static/gatling-results.png)
 
 You can view the JHipster Console at <http://localhost:5601>. Navigate to Dashboards > Open to view some pre-built
 dashboards for the JVM, logs, metrics, microservices, and performance. The screenshots below show you what some of 
@@ -645,130 +644,6 @@ To save your changes for Docker Compose, commit your changes to Git.
 ```
 git commit -a -m "Add Docker Compose"
 ```
-
-### Run with Kubernetes and Minikube
-
-[Kubernetes](https://kubernetes.io/) is an open-source system for automating deployment, scaling, and management of 
-containerized applications. It was developed at Google over the last 16 years and was internally called Borg. To deploy
-Docker containers with Kubernetes, you setup a cluster, then deploy to it. The context can be local (with Minikube), or 
-remote (e.g. a Raspberry Pi cluster, Google Cloud, AWS, OpenShift, etc.).
-
-Follow the steps below to use Kubernetes to deploy to a local cluster.
-
-1. Install [kubectl](https://kubernetes.io/docs/tasks/kubectl/install/), [VirtualBox](https://www.virtualbox.org/wiki/Downloads), 
-and [Minikube](https://github.com/kubernetes/minikube/releases).
-2. Start Minikube using `minikube start`.
-3. To be able to work with the docker daemon, run the following command in your terminal:
-
-   ```bash
-   eval $(minikube docker-env)
-   ```
-  
-4. Create Docker images of the `blog` and `store` applications:
-   
-    ```bash
-    mvn package -Pprod docker:build
-    ```
-      
-5. Using your terminal, navigate to the root directory of your project, and create a `kubernetes` directory. Then run the 
-[JHipster Kubernetes sub-generator](https://jhipster.github.io/kubernetes/) in it.
-
-    ```
-    yo jhipster:kubernetes
-    ````
-    
-    * Application type: `Microservice application`
-    * Root directory of your microservices: `../`
-    * Applications to include: `blog` and `store`
-    * The admin password for the JHipster Registry: `admin`
-    * Kubernetes namespace: `default`
-    * Base Docker repository name (e.g. mraible): `<your-docker-hub-username>`
-    * Command to push Docker image to repository: `docker push`
-    
-    ![Generating Kubernetes](static/generate-kubernetes.png)
-  
-6. Run the following commands to tag your Docker images. The Kubernetes sub-generator says to run `docker push` as well, 
-but you don't need that for a Minikube deployment.
-
-    ```bash
-    docker image tag blog mraible/blog
-    docker image tag store mraible/store
-    ```
-    
-7. Run the following commands in the `kubernetes` directory to deploy to Minikube. 
-
-    ```
-    kubectl apply -f registry
-    kubectl apply -f blog
-    kubectl apply -f store
-    ```
-    
-    The deployment process can take several minutes to complete. Run `minikube dashboard` to see the deployed containers.
-    
-    ![Minikube Dashboard](static/minikube-dashboard.png)
-    
-    You can also run `kubectl get po -o wide --watch` to see the status of each pod.
-
-8. Run `minikube service blog` to view the blog application. You should be able to login and add blogs, entries, and products.
-
-To remove all deployed containers, run the following command:
-
-    kubectl delete deployment --all
-    
-To stop Minikube, run `minikube stop`.
-
-To save your changes for Kubernetes, commit your changes to Git from the top-level directory.
-
-```
-git commit -a -m "Kubernetes"
-```
-
-### Deploy to Google Cloud
-
-Google Cloud is a PaaS that's built on Google's core infrastructure. It's one of the easiest providers to get Kubernetes 
-working with. Completed the steps below to deploy your hip microservices to Google Cloud. If you completed the Minikube
-section above, open a new terminal window to reset things.
-
-1. Create a Google Cloud project at [console.cloud.google.com](https://console.cloud.google.com/).
-2. Navigate to <https://console.cloud.google.com/kubernetes/list> to initialize the Container Engine for your project. 
-3. Install [Google Cloud SDK](https://cloud.google.com/sdk/) and set project using:
-  
-       gcloud config set project <project-name>
-
-4. Create a cluster:
-  
-       gcloud container clusters create <cluster-name> --machine-type=n1-standard-2 --scopes cloud-platform --zone us-west1-a
-       
-   To see a list of possible zones, run `gcloud compute zones list`.
-   
-5. Push the `blog` and `store` docker images to [Docker Hub](https://hub.docker.com/). You will need to create an account 
-and run `docker login` to push your images. The images can be run from any directory.
-
-    ```bash
-    docker image tag blog mraible/blog
-    docker push mraible/blog
-    docker image tag store mraible/store
-    docker push mraible/store
-    ```
-
-6. Run `kubectl` commands to deploy.
-
-    ```bash
-    kubectl apply -f registry
-    kubectl apply -f blog
-    kubectl apply -f store
-    ```
-
-7. Use port-forwarding to see the registry app locally.
-
-       kubectl port-forward jhipster-registry-0 8761:8761
-    
-8. Run `kubectl get service blog` to get the external IP of the blog application on Google Cloud. Open 
-`http://<external-ip>:8080` to view your running application and verify everything works.
-
-9. Scale microservice apps as needed with `kubectl`:
-
-       kubectl scale --replicas=3 deployment/store
        
 If you got everything working, congratulations! It's not easy learning all this new stuff.
 
